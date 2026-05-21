@@ -4,17 +4,17 @@ TRUNCATE TABLE choices RESTART IDENTITY;
 TRUNCATE TABLE questions RESTART IDENTITY;
 TRUNCATE TABLE result_types RESTART IDENTITY;
 
-INSERT INTO questions (id, question_text, display_order, is_active) VALUES
-  (1, '팀장님이 “이거 오늘 안에 되지?”라고 물었다. 사실 좀 애매하다.', 1, TRUE),
-  (2, '팀장님이 갑자기 “잠깐 얘기 좀 할까?”라고 한다.', 2, TRUE),
-  (3, '회의 중 팀장님이 살짝 재미없는 농담을 했다.', 3, TRUE),
-  (4, '업무 중 실수가 생겼다. 아직 팀장님은 모른다.', 4, TRUE),
-  (5, '팀장님이 퇴근 직전에 “이거 간단히만 봐줄래?”라고 한다.', 5, TRUE),
-  (6, '팀장님이 업무 방향을 갑자기 바꿨다.', 6, TRUE),
-  (7, '팀장님이 단체방에 공지를 올렸다.', 7, TRUE),
-  (8, '팀장님이 “요즘 일 많지?”라고 묻는다.', 8, TRUE),
-  (9, '팀장님이 내가 한 일을 칭찬했다.', 9, TRUE),
-  (10, '팀장님과 의견이 다르다.', 10, TRUE);
+INSERT INTO questions (id, question_text, question_type, display_order, is_active) VALUES
+  (1, '팀장님이 “이거 오늘 안에 되지?”라고 물었다. 사실 좀 애매하다.', '보고/커뮤니케이션형', 1, TRUE),
+  (2, '팀장님이 갑자기 “잠깐 얘기 좀 할까?”라고 한다.', '호출/긴장 대응형', 2, TRUE),
+  (3, '회의 중 팀장님이 살짝 재미없는 농담을 했다.', '리액션/분위기 대응형', 3, TRUE),
+  (4, '업무 중 실수가 생겼다. 아직 팀장님은 모른다.', '실수/리스크 처리형', 4, TRUE),
+  (5, '팀장님이 퇴근 직전에 “이거 간단히만 봐줄래?”라고 한다.', '보고/커뮤니케이션형', 5, TRUE),
+  (6, '팀장님이 업무 방향을 갑자기 바꿨다.', '변화 적응형', 6, TRUE),
+  (7, '팀장님이 단체방에 공지를 올렸다.', '보고/커뮤니케이션형', 7, TRUE),
+  (8, '팀장님이 “요즘 일 많지?”라고 묻는다.', '관계 조율/의견 조정형', 8, TRUE),
+  (9, '팀장님이 내가 한 일을 칭찬했다.', '리액션/분위기 대응형', 9, TRUE),
+  (10, '팀장님과 의견이 다르다.', '관계 조율/의견 조정형', 10, TRUE);
 
 INSERT INTO choices (
   id, question_id, choice_text, display_order,

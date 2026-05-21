@@ -14,6 +14,14 @@ export type TraitScores = Record<TraitKey, number>;
 
 export type UserGender = "male" | "female" | "unspecified";
 
+export type QuestionType =
+  | "보고/커뮤니케이션형"
+  | "호출/긴장 대응형"
+  | "리액션/분위기 대응형"
+  | "실수/리스크 처리형"
+  | "변화 적응형"
+  | "관계 조율/의견 조정형";
+
 export type BossExpectationProfile = TraitScores & {
   mbti: MbtiType;
 };
@@ -39,6 +47,7 @@ export type QuestionChoice = TraitScores & {
 export type QuestionItem = {
   id: number;
   questionText: string;
+  questionType: QuestionType | null;
   displayOrder: number;
   choices: QuestionChoice[];
 };

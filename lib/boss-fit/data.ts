@@ -2,6 +2,7 @@ import { sql } from "@/lib/db";
 import type {
   QuestionChoice,
   QuestionItem,
+  QuestionType,
   ResultTypeRecord,
   SessionResultRecord,
   TraitScores,
@@ -11,6 +12,7 @@ import type { MbtiType } from "@/lib/constants";
 type SqlQuestionRow = {
   id: string | number;
   question_text: string;
+  question_type: string | null;
   display_order: string | number;
 };
 
@@ -73,7 +75,7 @@ function mapTraitScores(row: ScoreRow): TraitScores {
 
 export async function getActiveQuestions(): Promise<QuestionItem[]> {
   const questions = (await sql`
-    SELECT id, question_text, display_order
+    SELECT id, question_text, question_type, display_order
     FROM questions
     WHERE is_active = TRUE
     ORDER BY display_order ASC, id ASC
@@ -123,6 +125,7 @@ export async function getActiveQuestions(): Promise<QuestionItem[]> {
     return {
       id,
       questionText: question.question_text,
+      questionType: (question.question_type as QuestionType | null) ?? null,
       displayOrder: toNumber(question.display_order),
       choices: choicesByQuestionId.get(id) ?? [],
     };
