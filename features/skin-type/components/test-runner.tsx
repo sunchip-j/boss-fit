@@ -1,53 +1,35 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import type { AnswerInput, QuestionItem, UserGender } from "@/lib/boss-fit/types";
-import type { MbtiType } from "@/lib/constants";
+import {
+  calculateSkinType,
+  encodeSkinResult,
+} from "@/features/skin-type/calculate";
+import type { SkinQuestion } from "@/features/skin-type/types";
 
 type TestRunnerProps = {
-  bossMbti: MbtiType;
-  userGender: UserGender;
-  questions: QuestionItem[];
+  questions: SkinQuestion[];
 };
 
-type SessionResponse = {
-  sessionKey: string;
-  totalScore: number;
-  resultCode: string;
-};
-
-export function TestRunner({
-  bossMbti,
-  userGender,
-  questions,
-}: TestRunnerProps) {
+export function TestRunner({ questions }: TestRunnerProps) {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number>>({});
   const [error, setError] = useState("");
   const [isSubmitting, startTransition] = useTransition();
 
   const currentQuestion = questions[currentIndex];
   const answerCount = Object.keys(answers).length;
-  const currentChoiceId = answers[currentQuestion.id];
+  const currentChoiceIndex = answers[currentQuestion.id];
   const canGoPrev = currentIndex > 0;
   const isLastQuestion = currentIndex === questions.length - 1;
   const allAnswered = answerCount === questions.length;
 
-  const answerPayload = useMemo<AnswerInput[]>(() => {
-    return questions
-      .filter((question) => answers[question.id] !== undefined)
-      .map((question) => ({
-        questionId: question.id,
-        choiceId: answers[question.id],
-      }));
-  }, [answers, questions]);
-
-  function handleSelect(choiceId: number) {
+  function handleSelect(choiceIndex: number) {
     setAnswers((current) => ({
       ...current,
-      [currentQuestion.id]: choiceId,
+      [currentQuestion.id]: choiceIndex,
     }));
     setError("");
 
@@ -63,7 +45,7 @@ export function TestRunner({
   }
 
   function handleNext() {
-    if (currentChoiceId && !isLastQuestion) {
+    if (currentChoiceIndex !== undefined && !isLastQuestion) {
       setCurrentIndex((index) => index + 1);
       setError("");
       return;
@@ -74,84 +56,77 @@ export function TestRunner({
 
   function handleSubmit() {
     if (!allAnswered) {
-      setError("10개 질문에 모두 답해 주세요.");
+      setError(`${questions.length}개 문항에 모두 답해 주세요.`);
       return;
     }
 
-    startTransition(async () => {
+    startTransition(() => {
       try {
-        const response = await fetch("/api/sessions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            bossMbti,
-            userGender,
-            answers: answerPayload,
-          }),
-        });
-
-        if (!response.ok) {
-          const payload = (await response.json()) as { error?: string };
-          throw new Error(payload.error ?? "테스트 저장에 실패했습니다.");
-        }
-
-        const payload = (await response.json()) as SessionResponse;
-        router.push(`/result/${payload.sessionKey}`);
+        const result = calculateSkinType(answers);
+        router.push(`/result?${encodeSkinResult(result)}`);
       } catch (submissionError) {
         setError(
           submissionError instanceof Error
             ? submissionError.message
-            : "테스트 저장 중 오류가 발생했습니다."
+            : "결과 계산 중 오류가 발생했습니다."
         );
       }
     });
   }
 
   return (
-    <section className="mx-auto w-full max-w-md rounded-[28px] border border-slate-200 bg-white px-5 py-6 shadow-[0_18px_40px_rgba(148,163,184,0.14)] sm:px-6">
+    <section className="mx-auto w-full max-w-md rounded-[28px] border border-emerald-100 bg-white px-5 py-6 shadow-[0_18px_40px_rgba(15,118,110,0.12)] sm:px-6">
       <div className="space-y-5">
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm font-semibold text-slate-500">
             <span>
               {currentIndex + 1} / {questions.length}
             </span>
-            <span>{bossMbti} 팀장 기준</span>
+            <span>{currentQuestion.dimension.replaceAll("_", " / ")}</span>
           </div>
           <div className="h-2 rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-sky-500 transition-all"
+              className="h-full rounded-full bg-emerald-500 transition-all"
               style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
             />
           </div>
         </div>
 
-        <div className="rounded-[24px] bg-slate-50 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-600">
+        <div className="rounded-[24px] bg-emerald-50/70 p-4">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
             Question {currentIndex + 1}
           </p>
           <h1 className="mt-2 text-xl font-black leading-8 text-slate-900">
-            {currentQuestion.questionText}
+            {currentQuestion.text}
           </h1>
+          {currentQuestion.note ? (
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {currentQuestion.note}
+            </p>
+          ) : null}
+          {currentQuestion.sourceNote ? (
+            <p className="mt-3 text-xs leading-5 text-amber-700">
+              {currentQuestion.sourceNote}
+            </p>
+          ) : null}
         </div>
 
         <div className="space-y-3">
-          {currentQuestion.choices.map((choice) => {
-            const isSelected = currentChoiceId === choice.id;
+          {currentQuestion.choices.map((choice, choiceIndex) => {
+            const isSelected = currentChoiceIndex === choiceIndex;
 
             return (
               <button
-                key={choice.id}
+                key={`${currentQuestion.id}-${choiceIndex}`}
                 type="button"
-                onClick={() => handleSelect(choice.id)}
+                onClick={() => handleSelect(choiceIndex)}
                 className={`w-full rounded-[22px] border px-4 py-4 text-left text-base leading-6 transition ${
                   isSelected
-                    ? "border-sky-500 bg-sky-50 text-sky-900"
-                    : "border-slate-200 bg-white text-slate-700 hover:border-sky-300 hover:bg-sky-50/50"
+                    ? "border-emerald-500 bg-emerald-50 text-emerald-950"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50"
                 }`}
               >
-                {choice.choiceText}
+                {choice.text}
               </button>
             );
           })}
@@ -183,9 +158,9 @@ export function TestRunner({
               type="button"
               onClick={handleNext}
               disabled={isSubmitting}
-              className="flex h-12 flex-[1.4] items-center justify-center rounded-2xl bg-sky-600 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+              className="flex h-12 flex-[1.4] items-center justify-center rounded-2xl bg-emerald-600 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
             >
-              다음 질문
+              다음 문항
             </button>
           )}
         </div>

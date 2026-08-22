@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 
+const BASE_URL = "https://boss-fit.vercel.app";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://boss-fit.vercel.app",
+      url: BASE_URL,
     },
     {
-      url: "https://boss-fit.vercel.app/api/health",
+      url: `${BASE_URL}/test`,
     },
   ];
 }

@@ -4,20 +4,19 @@ import { useState } from "react";
 
 type ResultShareProps = {
   shareText: string;
-  score: number;
   title: string;
 };
 
-export function ResultShare({ shareText, score, title }: ResultShareProps) {
+export function ResultShare({ shareText, title }: ResultShareProps) {
   const [message, setMessage] = useState("");
 
   async function handleShare() {
-    const text = `${shareText} (${score}점 / ${title})`;
+    const text = `${shareText} (${title})`;
 
     try {
       if (navigator.share) {
         await navigator.share({
-          title: "상사핏 테스트 결과",
+          title: "Modified Baumann Skin Type",
           text,
         });
         setMessage("공유 창을 열었습니다.");
@@ -36,7 +35,7 @@ export function ResultShare({ shareText, score, title }: ResultShareProps) {
       <button
         type="button"
         onClick={handleShare}
-        className="flex h-12 w-full items-center justify-center rounded-2xl bg-sky-600 text-sm font-semibold text-white transition hover:bg-sky-500"
+        className="flex h-12 w-full items-center justify-center rounded-2xl bg-emerald-600 text-sm font-semibold text-white transition hover:bg-emerald-500"
       >
         결과 공유하기
       </button>
