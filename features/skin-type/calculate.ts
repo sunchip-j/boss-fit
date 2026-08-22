@@ -28,14 +28,6 @@ export const skinResults = Object.values(
 
 export type SkinAnswerMap = Record<string, number>;
 
-export const DIMENSION_LABELS: Record<DimensionKey, string> = {
-  dry_oily: skinDimensionMap.dry_oily.title,
-  sensitive_resistant: skinDimensionMap.sensitive_resistant.title,
-  pigmented_nonpigmented:
-    skinDimensionMap.pigmented_nonpigmented.title,
-  wrinkled_tight: skinDimensionMap.wrinkled_tight.title,
-};
-
 export const LETTER_LABELS: Record<string, string> = {
   D: "Dry",
   O: "Oily",

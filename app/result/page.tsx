@@ -2,18 +2,56 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  DIMENSION_LABELS,
   LETTER_LABELS,
   getSkinResultFromParams,
 } from "@/features/skin-type/calculate";
 import { ResultShare } from "@/features/skin-type/components/result-share";
-import { DIMENSION_KEYS } from "@/features/skin-type/types";
+import { DIMENSION_KEYS, type DimensionKey } from "@/features/skin-type/types";
 
 type ResultPageProps = {
   searchParams: Promise<{
     [key: string]: string | string[] | undefined;
   }>;
 };
+
+const DIMENSION_DISPLAY: Record<
+  DimensionKey,
+  {
+    left: string;
+    right: string;
+    leftResult: string;
+    rightResult: string;
+  }
+> = {
+  dry_oily: {
+    left: "건성(D)",
+    right: "지성(O)",
+    leftResult: "건성(D)",
+    rightResult: "지성(O)",
+  },
+  sensitive_resistant: {
+    left: "저항성(R)",
+    right: "민감성(S)",
+    leftResult: "저항성(R)",
+    rightResult: "민감성(S)",
+  },
+  pigmented_nonpigmented: {
+    left: "비색소성(N)",
+    right: "색소성(P)",
+    leftResult: "비색소성(N)",
+    rightResult: "색소성(P)",
+  },
+  wrinkled_tight: {
+    left: "탄력(T)",
+    right: "주름(W)",
+    leftResult: "탄력(T)",
+    rightResult: "주름(W)",
+  },
+};
+
+function formatScore(score: number): string {
+  return Number.isInteger(score) ? String(score) : String(score);
+}
 
 export async function generateMetadata({
   searchParams,
@@ -120,29 +158,41 @@ export default async function SkinTypeResultPage({ searchParams }: ResultPagePro
             <div className="mt-4 space-y-3">
               {DIMENSION_KEYS.map((key) => {
                 const score = result.scores[key];
-                const threshold = result.thresholds[key];
+                const rightStartsAt = result.thresholds[key];
                 const maxScore = result.maxScores[key];
+                const display = DIMENSION_DISPLAY[key];
+                const currentLabel =
+                  score >= rightStartsAt ? display.rightResult : display.leftResult;
+                const markerPosition = Math.max(
+                  0,
+                  Math.min(100, (score / maxScore) * 100)
+                );
 
                 return (
                   <div key={key} className="rounded-2xl bg-white px-3 py-3">
-                    <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-semibold text-slate-600">
-                        {DIMENSION_LABELS[key]}
-                      </span>
-                      <span className="font-black text-slate-900">
-                        {score} / {maxScore}
-                      </span>
+                    <div className="flex items-center justify-between gap-3 text-sm font-semibold text-slate-600">
+                      <span>{display.left}</span>
+                      <span>{display.right}</span>
                     </div>
-                    <div className="mt-2 h-2 rounded-full bg-slate-100">
+                    <div className="relative mt-3 h-2 rounded-full bg-slate-100">
                       <div
                         className="h-full rounded-full bg-emerald-500"
                         style={{
-                          width: `${Math.max(8, Math.min(100, (score / maxScore) * 100))}%`,
+                          width: `${markerPosition}%`,
+                        }}
+                      />
+                      <div
+                        className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-600 shadow-sm"
+                        style={{
+                          left: `${markerPosition}%`,
                         }}
                       />
                     </div>
-                    <p className="mt-2 text-xs leading-5 text-slate-500">
-                      기준점 {threshold} 초과 시 오른쪽 특성으로 판정합니다.
+                    <p className="mt-3 text-sm font-black text-slate-900">
+                      {formatScore(score)}점 · {currentLabel}
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">
+                      {formatScore(rightStartsAt)}점부터 {display.right}
                     </p>
                   </div>
                 );
