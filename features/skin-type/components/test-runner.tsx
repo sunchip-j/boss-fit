@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   calculateSkinType,
   encodeSkinResult,
+  skinDimensionMap,
 } from "@/features/skin-type/calculate";
 import type { SkinQuestion } from "@/features/skin-type/types";
 
@@ -82,7 +83,7 @@ export function TestRunner({ questions }: TestRunnerProps) {
             <span>
               {currentIndex + 1} / {questions.length}
             </span>
-            <span>{currentQuestion.dimension.replaceAll("_", " / ")}</span>
+            <span>{skinDimensionMap[currentQuestion.dimension].title}</span>
           </div>
           <div className="h-2 rounded-full bg-slate-100">
             <div
@@ -100,7 +101,7 @@ export function TestRunner({ questions }: TestRunnerProps) {
             {currentQuestion.text}
           </h1>
           {currentQuestion.note ? (
-            <p className="mt-3 text-sm leading-6 text-slate-600">
+            <p className="mt-3 rounded-2xl border border-emerald-100 bg-white px-3 py-2 text-sm leading-6 text-slate-600">
               {currentQuestion.note}
             </p>
           ) : null}
