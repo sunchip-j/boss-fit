@@ -45,16 +45,6 @@ export function TestRunner({ questions }: TestRunnerProps) {
     }
   }
 
-  function handleNext() {
-    if (currentChoiceIndex !== undefined && !isLastQuestion) {
-      setCurrentIndex((index) => index + 1);
-      setError("");
-      return;
-    }
-
-    setError("선택지를 하나 골라주세요.");
-  }
-
   function handleSubmit() {
     if (!allAnswered) {
       setError(`${questions.length}개 문항에 모두 답해 주세요.`);
@@ -154,16 +144,7 @@ export function TestRunner({ questions }: TestRunnerProps) {
             >
               {isSubmitting ? "결과 계산 중..." : "결과 보기"}
             </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleNext}
-              disabled={isSubmitting}
-              className="flex h-12 flex-[1.4] items-center justify-center rounded-2xl bg-emerald-600 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
-              다음 문항
-            </button>
-          )}
+          ) : null}
         </div>
       </div>
     </section>

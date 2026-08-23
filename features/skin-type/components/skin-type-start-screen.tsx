@@ -57,7 +57,7 @@ function ClockIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4"
+      className="h-3.5 w-3.5"
       fill="none"
       viewBox="0 0 24 24"
     >
@@ -78,8 +78,9 @@ export function SkinTypeStartScreen() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f7fbf8] text-[#101828]">
-      <section className="mx-auto min-h-screen w-full max-w-[28rem] pb-44">
+      <section className="mx-auto min-h-screen w-full max-w-[28rem]">
         <div className="px-5 pt-4">
+          {/* Hero */}
           <section>
             <div className="flex items-center justify-between">
               <p className="text-[0.69rem] font-black uppercase tracking-[0.2em] text-emerald-700">
@@ -109,16 +110,13 @@ export function SkinTypeStartScreen() {
               체계를 기반으로 합니다.
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-black text-slate-600">
-              <span>33문항</span>
-              <span className="text-slate-300">·</span>
-              <span>4가지 피부 특성</span>
-              <span className="text-slate-300">·</span>
-              <span>16가지 피부 유형</span>
-            </div>
+            <p className="mt-2 text-sm font-bold text-emerald-700">
+              쉽게 말하면, 피부의 MBTI(?) 같은 방식입니다.
+            </p>
           </section>
 
-          <section className="mt-8 rounded-[28px] bg-white px-5 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)] ring-1 ring-slate-100">
+          {/* 4가지 피부 특성 */}
+          <section className="mt-6 rounded-[28px] bg-white px-5 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)] ring-1 ring-slate-100">
             <div>
               <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-700">
                 4 Skin Characteristics
@@ -138,6 +136,7 @@ export function SkinTypeStartScreen() {
                         <p className="text-xl font-black leading-none text-slate-950">
                           {axis.leftCode}
                         </p>
+
                         <p className="text-sm font-bold text-slate-500">
                           {axis.left}
                         </p>
@@ -154,6 +153,7 @@ export function SkinTypeStartScreen() {
                         <p className="text-sm font-bold text-slate-500">
                           {axis.right}
                         </p>
+
                         <p className="text-xl font-black leading-none text-slate-950">
                           {axis.rightCode}
                         </p>
@@ -178,31 +178,33 @@ export function SkinTypeStartScreen() {
               </p>
             </div>
           </section>
-        </div>
 
-        <div className="fixed inset-x-0 bottom-0 z-20 bg-gradient-to-t from-[#f7fbf8] via-[#f7fbf8] to-[#f7fbf8]/0 px-4 pb-5 pt-8">
-          <div className="mx-auto max-w-[28rem]">
-            <p className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-500">
-              <ClockIcon />
-              예상 소요 시간 · 약 3~5분
-            </p>
-
+          {/* CTA */}
+          <section className="pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-6">
             <Link
               href="/play/skin-type/test"
-              className="mt-3 flex h-[3.75rem] w-full items-center justify-center gap-2 rounded-[20px] bg-emerald-600 text-base font-black text-white shadow-[0_16px_34px_rgba(5,150,105,0.24)] transition hover:bg-emerald-500"
+              className="flex min-h-[4.5rem] w-full flex-col items-center justify-center rounded-[20px] bg-emerald-600 text-white shadow-[0_16px_34px_rgba(5,150,105,0.24)] transition hover:bg-emerald-500"
             >
-              내 피부 유형 분석하기
-              <span aria-hidden="true">→</span>
+              <span className="flex items-center gap-2 text-base font-black">
+                내 피부 유형 분석하기
+                <span aria-hidden="true">→</span>
+              </span>
+
+              <span className="mt-1 flex items-center gap-1.5 text-[0.7rem] font-semibold text-emerald-100">
+                <ClockIcon />
+                33문항 · 약 3~5분
+              </span>
             </Link>
 
             <p className="mx-auto mt-3 max-w-[22rem] text-center text-[0.68rem] font-medium leading-5 text-slate-400">
               피부 특성을 이해하기 위한 참고용 분석이며 의학적 진단을 대체하지
               않습니다.
             </p>
-          </div>
+          </section>
         </div>
       </section>
 
+      {/* Baumann 설명 모달 */}
       {isInfoOpen ? (
         <div
           aria-modal="true"

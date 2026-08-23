@@ -78,3 +78,53 @@ export type SkinAssessmentResult = {
   letters: SkinLetters;
   resultType: SkinResultDefinition;
 };
+
+export type SkinTrait = "O" | "D" | "S" | "R" | "P" | "N" | "W" | "T";
+
+export type ProductCategory =
+  | "cleanser"
+  | "toner"
+  | "serum"
+  | "moisturizer"
+  | "sunscreen";
+
+export type RecommendationLevel = "essential" | "recommended" | "optional";
+
+export type ProductRecommendation = {
+  skinType: SkinTypeCode;
+  reason: string;
+  order: number;
+};
+
+export type SkinProduct = {
+  id: string;
+  brand: string;
+  name: string;
+  category: ProductCategory;
+  imageUrl?: string;
+  tags: string[];
+  summary: string;
+  oliveYoungUrl?: string;
+  recommendations: ProductRecommendation[];
+  active: boolean;
+};
+
+export type ResolvedRecommendedProduct = {
+  product: SkinProduct;
+  recommendation: ProductRecommendation;
+};
+
+export type SkinTypeInfo = {
+  code: SkinTypeCode;
+  traits: string[];
+  summary: string;
+  priorities: string[];
+  routineLevels: Record<ProductCategory, RecommendationLevel>;
+};
+
+export type RoutineStep = {
+  category: ProductCategory;
+  label: string;
+  description: string;
+  optional?: boolean;
+};
