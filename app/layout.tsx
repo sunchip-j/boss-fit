@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Modified Baumann Skin Type",
+    default: "Modified Baumann SKIN TYPE",
     template: "%s",
   },
   description: "33개 문항으로 나의 4글자 피부 타입을 확인해보세요.",

@@ -82,14 +82,14 @@ export function SkinTypeStartScreen() {
         <div className="px-5 pt-4">
           {/* Hero */}
           <section>
-            <div className="flex items-center justify-between">
-              <p className="text-[0.69rem] font-black uppercase tracking-[0.2em] text-emerald-700">
-                Baumann Skin Type System
+            <div className="grid grid-cols-[minmax(0,1fr)_2.25rem] items-center gap-3">
+              <p className="min-w-0 truncate text-[0.69rem] font-black uppercase tracking-[0.2em] text-emerald-700">
+                BAUMANN SKIN TYPE SYSTEM
               </p>
 
               <button
-                aria-label="바우만 피부타입 안내 열기"
-                className="grid h-9 w-9 place-items-center rounded-full text-slate-500 transition hover:bg-white"
+                aria-label="바우만 피부 타입 안내 열기"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-slate-500 transition hover:bg-white"
                 type="button"
                 onClick={() => setIsInfoOpen(true)}
               >
@@ -97,33 +97,31 @@ export function SkinTypeStartScreen() {
               </button>
             </div>
 
-            <h1 className="mt-4 text-[2.45rem] font-black leading-[1.08] tracking-[-0.045em] text-slate-950">
-              피부를 4가지 기준으로
+            <h1 className="mt-4 text-[1.9rem] font-black leading-[1.13] tracking-[-0.038em] text-slate-950 sm:text-[2.1rem]">
+              내 <span className="text-emerald-600">SKIN TYPE</span>을
               <br />
-              <span className="text-emerald-600">
-                체계적으로 분석합니다.
-              </span>
+              확인해보세요.
             </h1>
 
             <p className="mt-5 max-w-[22rem] text-[0.96rem] font-semibold leading-7 text-slate-600">
-              피부과 전문의 Leslie Baumann, M.D.가 개발한 피부 유형 분류
+              피부과 전문의 Leslie Baumann, M.D.가 개발한 피부 타입 분류
               체계를 기반으로 합니다.
             </p>
 
             <p className="mt-2 text-sm font-bold text-emerald-700">
-              쉽게 말하면, 피부의 MBTI(?) 같은 방식입니다.
+              쉽게 말하면, 피부의 MBTI(?)라고 볼 수 있어요.
             </p>
           </section>
 
           {/* 4가지 피부 특성 */}
-          <section className="mt-6 rounded-[28px] bg-white px-5 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)] ring-1 ring-slate-100">
+          <section className="mt-5 rounded-[28px] bg-white px-5 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.05)] ring-1 ring-slate-100">
             <div>
               <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-700">
                 4 Skin Characteristics
               </p>
 
               <h2 className="mt-2 text-lg font-black tracking-tight text-slate-950">
-                피부 유형을 결정하는 4가지 기준
+                피부 타입을 결정하는 4가지 기준
               </h2>
             </div>
 
@@ -172,7 +170,7 @@ export function SkinTypeStartScreen() {
               <p className="text-sm font-semibold leading-6 text-slate-500">
                 네 가지 특성의 조합을 통해
                 <strong className="ml-1 font-black text-slate-800">
-                  16가지 피부 유형
+                  16가지 피부 타입
                 </strong>
                 중 하나로 분류합니다.
               </p>
@@ -186,7 +184,7 @@ export function SkinTypeStartScreen() {
               className="flex min-h-[4.5rem] w-full flex-col items-center justify-center rounded-[20px] bg-emerald-600 text-white shadow-[0_16px_34px_rgba(5,150,105,0.24)] transition hover:bg-emerald-500"
             >
               <span className="flex items-center gap-2 text-base font-black">
-                내 피부 유형 분석하기
+                내 피부 타입 분석하기
                 <span aria-hidden="true">→</span>
               </span>
 
@@ -212,7 +210,7 @@ export function SkinTypeStartScreen() {
           role="dialog"
         >
           <button
-            aria-label="바우만 피부타입 안내 닫기"
+            aria-label="바우만 피부 타입 안내 닫기"
             className="absolute inset-0 cursor-default"
             type="button"
             onClick={() => setIsInfoOpen(false)}
@@ -224,11 +222,11 @@ export function SkinTypeStartScreen() {
             <div className="mt-5 flex items-start justify-between gap-4">
               <div>
                 <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-700">
-                  Baumann Skin Type System
+                  BAUMANN SKIN TYPE SYSTEM
                 </p>
 
                 <h2 className="mt-2 text-xl font-black tracking-tight text-slate-950">
-                  바우만 피부타입이란?
+                  바우만 피부 타입이란?
                 </h2>
               </div>
 
@@ -244,7 +242,7 @@ export function SkinTypeStartScreen() {
 
             <div className="mt-5 space-y-5 text-sm font-semibold leading-6 text-slate-600">
               <p>
-                피부과 전문의 Leslie Baumann, M.D.가 개발한 피부 유형 분류
+                피부과 전문의 Leslie Baumann, M.D.가 개발한 피부 타입 분류
                 체계로, 피부 특성을 4가지 기준으로 나누어 살펴봅니다.
               </p>
 
@@ -274,7 +272,7 @@ export function SkinTypeStartScreen() {
               <p>
                 각 기준의 결과를 조합해 DSNT, OSPW와 같은
                 <strong className="mx-1 font-black text-slate-800">
-                  16가지 피부 유형
+                  16가지 피부 타입
                 </strong>
                 중 하나로 분류합니다.
               </p>

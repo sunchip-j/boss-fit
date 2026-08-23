@@ -16,7 +16,7 @@ export function ResultShare({ shareText, title }: ResultShareProps) {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: "Modified Baumann Skin Type",
+          title: "Modified Baumann SKIN TYPE",
           text,
         });
         setMessage("공유 창을 열었습니다.");

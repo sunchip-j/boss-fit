@@ -5,22 +5,19 @@ import { TestRunner } from "@/features/skin-type/components/test-runner";
 
 export const metadata: Metadata = {
   title: "피부 타입 설문",
-  description: "Modified Baumann Skin Type 설문을 진행합니다.",
+  description: "바우만 피부 타입 설문을 진행합니다.",
 };
 
 export default function SkinTypeTestPage() {
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbf8_0%,#eef7f4_100%)] px-4 py-8 text-slate-900">
-      <div className="mx-auto max-w-md space-y-5">
-        <div className="space-y-2 text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.24em] text-emerald-600">
-            Modified Baumann Skin Type
-          </p>
-          <h1 className="text-3xl font-black tracking-tight text-slate-900">
-            피부 타입 설문
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbf8_0%,#eef7f4_100%)] px-4 py-5 text-slate-900">
+      <div className="mx-auto max-w-md space-y-3">
+        <div className="space-y-1.5 text-center">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">
+            나의 피부 타입 찾기
           </h1>
-          <p className="text-sm leading-6 text-slate-500">
-            최근 3개월의 피부 상태를 기준으로 가장 가까운 답을 골라주세요.
+          <p className="text-sm font-medium leading-6 text-slate-500">
+            최근 3개월의 피부 상태를 기준으로 답해주세요.
           </p>
         </div>
 

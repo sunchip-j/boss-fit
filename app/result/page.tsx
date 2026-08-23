@@ -216,15 +216,15 @@ export async function generateMetadata({
   if (!result) {
     return {
       title: "피부 타입 결과",
-      description: "내 Baumann Skin Type 결과를 확인해보세요.",
+      description: "내 바우만 피부 타입 결과를 확인해보세요.",
     };
   }
 
   return {
-    title: `${result.code} | Baumann Skin Type`,
+    title: `${result.code} | BAUMANN SKIN TYPE`,
     description: result.resultType.shareText ?? result.resultType.summary,
     openGraph: {
-      title: `${result.code} | Baumann Skin Type`,
+      title: `${result.code} | BAUMANN SKIN TYPE`,
       description: result.resultType.shareText ?? result.resultType.summary,
     },
   };
@@ -279,7 +279,7 @@ export default async function SkinTypeResultPage({
         {/* RESULT HERO */}
         <header className="px-5 pb-7 pt-7 text-center sm:px-7">
           <p className="text-[0.68rem] font-black uppercase tracking-[0.24em] text-emerald-600">
-            Baumann Skin Type Result
+            BAUMANN SKIN TYPE RESULT
           </p>
 
           <p className="mt-4 text-[3.25rem] font-black leading-none tracking-[-0.06em] text-emerald-700">

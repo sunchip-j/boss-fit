@@ -35,11 +35,11 @@ export async function generateMetadata({
 
   if (!skinType) {
     return {
-      title: "맞춤 제품 추천 | Baumann Skin Type",
+      title: "맞춤 제품 추천 | BAUMANN SKIN TYPE",
     };
   }
 
-  const title = `${skinType} 맞춤 제품 추천 | Baumann Skin Type`;
+  const title = `${skinType} 맞춤 제품 추천 | BAUMANN SKIN TYPE`;
   const description = `${skinType} 피부 특성을 고려한 기본 스킨케어 루틴과 단계별 추천 제품을 확인해보세요.`;
 
   return {
@@ -69,7 +69,7 @@ export default async function SkinTypeProductsPage({
           <ResultBackButton />
 
           <p className="mt-6 text-[0.68rem] font-black uppercase tracking-[0.24em] text-emerald-600">
-            Baumann Skin Type
+            BAUMANN SKIN TYPE
           </p>
 
           <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-950">

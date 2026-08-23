@@ -5,12 +5,18 @@ import { useRouter } from "next/navigation";
 import {
   calculateSkinType,
   encodeSkinResult,
-  skinDimensionMap,
 } from "@/features/skin-type/calculate";
 import type { SkinQuestion } from "@/features/skin-type/types";
 
 type TestRunnerProps = {
   questions: SkinQuestion[];
+};
+
+const DIMENSION_LABELS: Record<SkinQuestion["dimension"], string> = {
+  dry_oily: "건성 ↔ 지성",
+  sensitive_resistant: "저항성 ↔ 민감성",
+  pigmented_nonpigmented: "비색소성 ↔ 색소성",
+  wrinkled_tight: "탄력 ↔ 주름",
 };
 
 export function TestRunner({ questions }: TestRunnerProps) {
@@ -66,14 +72,13 @@ export function TestRunner({ questions }: TestRunnerProps) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-md rounded-[28px] border border-emerald-100 bg-white px-5 py-6 shadow-[0_18px_40px_rgba(15,118,110,0.12)] sm:px-6">
-      <div className="space-y-5">
-        <div className="space-y-3">
-          <div className="flex items-center justify-between text-sm font-semibold text-slate-500">
-            <span>
+    <section className="mx-auto w-full max-w-md rounded-[28px] border border-emerald-100 bg-white px-5 py-5 shadow-[0_18px_40px_rgba(15,118,110,0.12)] sm:px-6">
+      <div className="space-y-4">
+        <div className="space-y-2.5">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 text-sm font-semibold text-slate-500">
+            <span className="shrink-0">
               {currentIndex + 1} / {questions.length}
             </span>
-            <span>{skinDimensionMap[currentQuestion.dimension].title}</span>
           </div>
           <div className="h-2 rounded-full bg-slate-100">
             <div
@@ -85,7 +90,7 @@ export function TestRunner({ questions }: TestRunnerProps) {
 
         <div className="rounded-[24px] bg-emerald-50/70 p-4">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">
-            Question {currentIndex + 1}
+            {DIMENSION_LABELS[currentQuestion.dimension]}
           </p>
           <h1 className="mt-2 text-xl font-black leading-8 text-slate-900">
             {currentQuestion.text}
@@ -93,11 +98,6 @@ export function TestRunner({ questions }: TestRunnerProps) {
           {currentQuestion.note ? (
             <p className="mt-3 rounded-2xl border border-emerald-100 bg-white px-3 py-2 text-sm leading-6 text-slate-600">
               {currentQuestion.note}
-            </p>
-          ) : null}
-          {currentQuestion.sourceNote ? (
-            <p className="mt-3 text-xs leading-5 text-amber-700">
-              {currentQuestion.sourceNote}
             </p>
           ) : null}
         </div>
