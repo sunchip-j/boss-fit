@@ -12,15 +12,6 @@ export default function SkinTypeTestPage() {
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbf8_0%,#eef7f4_100%)] px-4 py-5 text-slate-900">
       <div className="mx-auto max-w-md space-y-3">
-        <div className="space-y-1.5 text-center">
-          <h1 className="text-2xl font-black tracking-tight text-slate-900">
-            나의 피부 타입 찾기
-          </h1>
-          <p className="text-sm font-medium leading-6 text-slate-500">
-            최근 3개월의 피부 상태를 기준으로 답해주세요.
-          </p>
-        </div>
-
         <TestRunner questions={skinQuestions} />
 
         <Link

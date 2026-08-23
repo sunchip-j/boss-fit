@@ -80,6 +80,9 @@ export function TestRunner({ questions }: TestRunnerProps) {
               {currentIndex + 1} / {questions.length}
             </span>
           </div>
+          <p className="text-sm font-medium leading-6 text-slate-500">
+            최근 3개월의 피부 상태를 기준으로 답해주세요.
+          </p>
           <div className="h-2 rounded-full bg-slate-100">
             <div
               className="h-full rounded-full bg-emerald-500 transition-all"
