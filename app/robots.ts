@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://boss-fit.vercel.app/sitemap.xml",
+    sitemap: "https://skin.vercel.app/sitemap.xml",
   };
 }

@@ -1,6 +1,6 @@
-# Modified Baumann Skin Type
+# skin
 
-Modified Baumann Skin Type 설문 MVP입니다.
+ILINA의 피부 관련 서비스 프로젝트입니다.
 
 ## 정책
 
