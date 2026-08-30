@@ -31,12 +31,28 @@ export function ResultShare({ shareText, title }: ResultShareProps) {
   }
 
   return (
-    <div className="space-y-2">
+    <div className="mt-3 space-y-1.5 text-center">
       <button
         type="button"
         onClick={handleShare}
-        className="flex h-12 w-full items-center justify-center rounded-2xl bg-emerald-600 text-sm font-semibold text-white transition hover:bg-emerald-500"
+        className="mx-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
       >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        >
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <path d="m8.59 13.51 6.83 3.98" />
+          <path d="m15.41 6.51-6.82 3.98" />
+        </svg>
         결과 공유하기
       </button>
       {message ? <p className="text-center text-xs text-slate-500">{message}</p> : null}

@@ -304,6 +304,90 @@ function getSunscreenDescription(type: SkinTypeCode): string {
   return "매일 이어가는 기본 자외선 차단";
 }
 
+type TraitCard = {
+  code: string;
+  title: string;
+  description: string;
+  tip: string;
+};
+
+export function getDrynessCard(type: SkinTypeCode): TraitCard {
+  if (type.includes("D")) {
+    return {
+      code: "D",
+      title: "건성",
+      description: "건조·당김을 느끼기 쉬워요.",
+      tip: "보습 크림은 하루 2번, 넉넉하게 발라주세요.",
+    };
+  }
+  return {
+    code: "O",
+    title: "지성",
+    description: "피지 분비가 많은 편이에요.",
+    tip: "가벼운 제형의 수분 제품을 추천해요.",
+  };
+}
+
+export function getSensitivityCard(type: SkinTypeCode): TraitCard {
+  if (type.includes("R")) {
+    return {
+      code: "R",
+      title: "저항성",
+      description: "외부 자극에 비교적 안정적인 편이에요.",
+      tip: "향료·각질케어 제품도 비교적 편하게 시도해볼 수 있어요.",
+    };
+  }
+  return {
+    code: "S",
+    title: "민감성",
+    description: "외부 자극에 예민하게 반응할 수 있어요.",
+    tip: "무향·저자극 제품 위주로 먼저 테스트해보세요.",
+  };
+}
+
+export function getPigmentationCard(type: SkinTypeCode): TraitCard {
+  if (type.includes("N")) {
+    return {
+      code: "N",
+      title: "비색소성",
+      description: "색소 침착 경향이 낮은 편이에요.",
+      tip: "미백보다 보습 중심 케어에 집중해도 좋아요.",
+    };
+  }
+  return {
+    code: "P",
+    title: "색소성",
+    description: "색소 침착이 생기기 쉬운 편이에요.",
+    tip: "매일 자외선 차단과 미백 케어를 함께 챙겨주세요.",
+  };
+}
+
+export function getWrinkleCard(type: SkinTypeCode): TraitCard {
+  if (type.includes("T")) {
+    return {
+      code: "T",
+      title: "탄력",
+      description: "피부 노화 징후가 비교적 적은 편이에요.",
+      tip: "예방 중심 케어면 충분해요.",
+    };
+  }
+  return {
+    code: "W",
+    title: "주름",
+    description: "탄력 저하나 주름이 생기기 쉬운 편이에요.",
+    tip: "탄력·콜라겐 케어 제품을 신경 써서 사용해보세요.",
+  };
+}
+
+export function getSkinTypeCards(type: SkinTypeCode): TraitCard[] {
+  return [
+    getDrynessCard(type),
+    getSensitivityCard(type),
+    getPigmentationCard(type),
+    getWrinkleCard(type),
+  ];
+}
+
 const ROUTINE_DESCRIPTIONS: Record<
   ProductCategory,
   (type: SkinTypeCode) => string
