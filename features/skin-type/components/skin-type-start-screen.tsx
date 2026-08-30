@@ -180,7 +180,7 @@ export function SkinTypeStartScreen() {
           {/* CTA */}
           <section className="pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-6">
             <Link
-              href="/play/skin-type/test"
+              href="/survey"
               className="flex min-h-[4.5rem] w-full flex-col items-center justify-center rounded-[20px] bg-emerald-600 text-white shadow-[0_16px_34px_rgba(5,150,105,0.24)] transition hover:bg-emerald-500"
             >
               <span className="flex items-center gap-2 text-base font-black">

@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: BASE_URL,
     },
     {
-      url: `${BASE_URL}/test`,
+      url: `${BASE_URL}/survey`,
     },
   ];
 }

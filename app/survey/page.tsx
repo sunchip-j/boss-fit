@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "바우만 피부 타입 설문을 진행합니다.",
 };
 
-export default function SkinTypeTestPage() {
+export default function SkinTypeSurveyPage() {
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbf8_0%,#eef7f4_100%)] px-4 py-5 text-slate-900">
       <div className="mx-auto max-w-md space-y-3">
